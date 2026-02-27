@@ -50,7 +50,12 @@ export class Course {
   @Prop({ default: true })
   hasCertificate: boolean;
 
-  @Prop({ required: true, enum: CourseStatus, default: CourseStatus.Draft })
+  @Prop({
+    required: true,
+    type: String,
+    enum: CourseStatus,
+    default: CourseStatus.Draft,
+  })
   status: CourseStatus;
 
   @Prop({

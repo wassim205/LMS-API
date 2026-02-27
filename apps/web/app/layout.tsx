@@ -53,7 +53,7 @@ export default function RootLayout({
               style: {
                 background: 'white',
                 color: '#1a1a1a',
-                borderRadius: '8px',
+                borderRadius: '4px',
                 border: 'none',
                 borderLeft: '5px solid #cb1030',
                 padding: '16px',

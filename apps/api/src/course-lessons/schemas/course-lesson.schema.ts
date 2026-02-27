@@ -24,7 +24,7 @@ export class CourseLesson {
   @Prop({ required: true, min: 0 })
   order: number;
 
-  @Prop({ required: true, enum: LessonContentType })
+  @Prop({ required: true, type: String, enum: LessonContentType })
   type: LessonContentType;
 
   @Prop({ required: true })

@@ -7,12 +7,19 @@ import {
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
+import { CourseStatus } from 'src/common/enums/course.enum';
 import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
 import { Course, CourseDocument } from './schemas/course.schema';
 
-import { CourseLesson, CourseLessonDocument } from '../course-lessons/schemas/course-lesson.schema';
-import { CourseModuleDocument, Module as CourseModuleEntity } from '../course-modules/schemas/course-module.schema';
+import {
+  CourseLesson,
+  CourseLessonDocument,
+} from '../course-lessons/schemas/course-lesson.schema';
+import {
+  CourseModuleDocument,
+  Module as CourseModuleEntity,
+} from '../course-modules/schemas/course-module.schema';
 
 @Injectable()
 export class CoursesService {
@@ -87,7 +94,10 @@ export class CoursesService {
     const course = await this.findOne(id, instructorId);
 
     // If attempting to publish, validate content
-    if (updateCourseDto.status === 'published' && course.status !== 'published') {
+    if (
+      updateCourseDto.status === CourseStatus.Published &&
+      course.status !== CourseStatus.Published
+    ) {
       await this.validateCourseForPublication(id);
     }
 
@@ -96,24 +106,32 @@ export class CoursesService {
   }
 
   private async validateCourseForPublication(courseId: string) {
-    const modules = await this.moduleModel.find({ courseId: new Types.ObjectId(courseId) }).lean();
-    
+    const modules = await this.moduleModel
+      .find({ courseId: new Types.ObjectId(courseId) })
+      .lean();
+
     if (!modules || modules.length === 0) {
-      throw new BadRequestException('Cannot publish course: It must have at least one module.');
+      throw new BadRequestException(
+        'Cannot publish course: It must have at least one module.',
+      );
     }
 
-    const moduleIds = modules.map(m => m._id);
+    const moduleIds = modules.map((m) => m._id);
     const lessonsCount = await this.lessonModel.aggregate([
       { $match: { moduleId: { $in: moduleIds }, isActive: true } },
-      { $group: { _id: '$moduleId', count: { $sum: 1 } } }
+      { $group: { _id: '$moduleId', count: { $sum: 1 } } },
     ]);
-    
-    const modulesWithLessons = new Set(lessonsCount.map(l => l._id.toString()));
+
+    const modulesWithLessons = new Set(
+      lessonsCount.map((l) => l._id.toString()),
+    );
 
     for (const module of modules) {
-        if (!modulesWithLessons.has(module._id.toString())) {
-             throw new BadRequestException(`Cannot publish course: Module "${module.title}" is empty (no lessons).`);
-        }
+      if (!modulesWithLessons.has(module._id.toString())) {
+        throw new BadRequestException(
+          `Cannot publish course: Module "${module.title}" is empty (no lessons).`,
+        );
+      }
     }
   }
 
@@ -196,7 +214,9 @@ export class CoursesService {
     return course;
   }
 
-  async getCategoriesWithCounts(): Promise<{ category: string; count: number }[]> {
+  async getCategoriesWithCounts(): Promise<
+    { category: string; count: number }[]
+  > {
     return this.courseModel
       .aggregate([
         { $match: { isPublicVisible: true, status: 'published' } },

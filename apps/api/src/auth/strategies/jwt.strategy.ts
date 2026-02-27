@@ -17,7 +17,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       secretOrKey: configService.getOrThrow<string>('JWT_SECRET'),
     });
   }
-  async validate(payload: { sub: string; role: Role; email: string }) {
+  validate(payload: { sub: string; role: Role; email: string }) {
     return {
       userId: payload.sub,
       email: payload.email,

@@ -1,7 +1,10 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
-import { CourseLesson, CourseLessonDocument } from 'src/course-lessons/schemas/course-lesson.schema';
+import {
+  CourseLesson,
+  CourseLessonDocument,
+} from 'src/course-lessons/schemas/course-lesson.schema';
 import {
   CourseModuleDocument,
   Module,
@@ -65,7 +68,10 @@ export class ProgressModuleService {
 
     if (!progress) {
       // Auto-initialize if it doesn't exist (e.g. legacy enrollment)
-      progress = await this.initializeCourseProgress(studentId, module.courseId.toString());
+      progress = await this.initializeCourseProgress(
+        studentId,
+        module.courseId.toString(),
+      );
     }
 
     if (!progress) return false;
@@ -120,13 +126,14 @@ export class ProgressModuleService {
    * 6️ Toggle Lesson Completion
    */
   async toggleLessonCompletion(studentId: string, lessonId: string) {
-    
     // Find the lesson to get the moduleId
     const lesson = await this.courseLessonModel.findById(lessonId);
     if (!lesson) throw new NotFoundException('Lesson not found');
-    
+
     // Find the module to get the courseId
-    const module = await this.moduleModel.findById(lesson.moduleId).select('courseId');
+    const module = await this.moduleModel
+      .findById(lesson.moduleId)
+      .select('courseId');
     if (!module) throw new NotFoundException('Module of lesson not found');
 
     const progress = await this.progressModel.findOne({
@@ -204,11 +211,11 @@ export class ProgressModuleService {
 
     return {
       courseId: progress.courseId,
-      overallProgress, 
+      overallProgress,
       modules: enrichedModules,
       completedModules: completedCount,
       totalModules: progress.modules.length,
-      completedLessons: progress.lessonsProgress?.map(l => l.lessonId) || [],
+      completedLessons: progress.lessonsProgress?.map((l) => l.lessonId) || [],
     };
   }
 

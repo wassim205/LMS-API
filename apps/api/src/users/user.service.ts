@@ -20,7 +20,7 @@ export class UsersService {
   }
 
   async findOne(email: string): Promise<UserDocument | null> {
-    return this.userModel.findOne({ email }).select('+password');
+    return this.userModel.findOne({ email }).select('+password').exec();
   }
 
   async findById(userId: string): Promise<UserDocument | null> {
@@ -40,7 +40,10 @@ export class UsersService {
 
     return user;
   }
-  async updateRefreshToken(userId: string, refreshTokenHash: string | null): Promise<void> {
+  async updateRefreshToken(
+    userId: string,
+    refreshTokenHash: string | null,
+  ): Promise<void> {
     await this.userModel.findByIdAndUpdate(userId, {
       refreshTokenHash,
     });

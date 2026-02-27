@@ -20,7 +20,7 @@ export default function ProTipBanner() {
         </div>
       </div>
 
-      <button className="mt-4 md:mt-0 bg-white text-zinc-900 px-4 py-2 rounded-md text-xs font-bold hover:bg-gray-100 transition-colors">
+      <button className="mt-4 md:mt-0 bg-white text-zinc-900 px-4 py-2 rounded-sm text-xs font-bold hover:bg-gray-100 transition-colors">
         Add Quiz Now
       </button>
     </div>

@@ -25,7 +25,7 @@ export class Question {
   @Prop({ required: true })
   text: string;
 
-  @Prop({ enum: QuestionType, default: QuestionType.QCM })
+  @Prop({ type: String, enum: QuestionType, default: QuestionType.QCM })
   type: QuestionType;
 
   @Prop({ type: [OptionSchema], default: [] })
@@ -54,7 +54,7 @@ export class Quiz extends Document {
   @Prop({ default: true })
   showResultsImmediately: boolean;
 
-  @Prop({ enum: QuizStatus, default: QuizStatus.DRAFT })
+  @Prop({ type: String, enum: QuizStatus, default: QuizStatus.DRAFT })
   status: QuizStatus;
 
   @Prop({ type: [QuestionSchema], default: [] })

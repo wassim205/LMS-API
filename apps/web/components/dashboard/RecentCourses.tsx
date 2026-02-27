@@ -58,7 +58,7 @@ const courses = [
 
 export default function RecentCourses() {
   return (
-    <div className="bg-white rounded-md border border-gray-100 overflow-hidden">
+    <div className="bg-white rounded-sm border border-gray-100 overflow-hidden">
       <div className="p-5 flex items-center justify-between border-b border-gray-100">
         <h3 className="text-base font-bold text-gray-900">Recent Courses</h3>
         <Link
@@ -102,7 +102,7 @@ export default function RecentCourses() {
                 <td className="py-4 px-5">
                   <div className="flex items-center gap-3">
                     <div
-                      className="h-10 w-10 rounded-md bg-gray-100 bg-cover bg-center shrink-0"
+                      className="h-10 w-10 rounded-sm bg-gray-100 bg-cover bg-center shrink-0"
                       style={{ backgroundImage: `url(${course.image})` }}
                     ></div>
                     <div>
@@ -162,7 +162,7 @@ export default function RecentCourses() {
                   </span>
                 </td>
                 <td className="py-4 px-5 text-right">
-                  <button className="text-gray-400 hover:text-gray-600 p-1.5 rounded-md hover:bg-gray-100 transition-colors">
+                  <button className="text-gray-400 hover:text-gray-600 p-1.5 rounded-sm hover:bg-gray-100 transition-colors">
                     <MoreVertical size={16} />
                   </button>
                 </td>
@@ -175,10 +175,10 @@ export default function RecentCourses() {
       <div className="p-4 border-t border-gray-100 flex items-center justify-between">
         <span className="text-xs text-gray-500">Showing 5 of 12 courses</span>
         <div className="flex gap-2">
-          <button className="px-3 py-1.5 text-xs border border-gray-200 rounded-md text-gray-500 hover:bg-gray-50">
+          <button className="px-3 py-1.5 text-xs border border-gray-200 rounded-sm text-gray-500 hover:bg-gray-50">
             Previous
           </button>
-          <button className="px-3 py-1.5 text-xs border border-gray-200 rounded-md text-gray-500 hover:bg-gray-50">
+          <button className="px-3 py-1.5 text-xs border border-gray-200 rounded-sm text-gray-500 hover:bg-gray-50">
             Next
           </button>
         </div>

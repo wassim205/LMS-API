@@ -1,15 +1,15 @@
 import {
-    BadRequestException,
-    ConflictException,
-    Injectable,
-    InternalServerErrorException,
-    NotFoundException,
+  BadRequestException,
+  ConflictException,
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
 import {
-    CourseModuleDocument,
-    Module as CourseModuleEntity,
+  CourseModuleDocument,
+  Module as CourseModuleEntity,
 } from 'src/course-modules/schemas/course-module.schema';
 import { QuizStatus } from '../../common/enums/quiz-status.enum';
 import { CreateQuizDto } from '../dto/create-quiz.dto';

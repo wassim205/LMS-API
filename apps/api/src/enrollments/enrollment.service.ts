@@ -1,6 +1,4 @@
-import {
-    Injectable
-} from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
 import { ProgressModuleService } from '../progress-module/progress-module.service';
@@ -35,23 +33,25 @@ export class EnrollmentService {
 
     // Initialize progress tracking
     await this.progressService.initializeCourseProgress(studentId, courseId);
- 
+
     return enrollment.populate({
       path: 'courseId',
-      populate: { path: 'instructorId', select: 'firstName lastName' }
+      populate: { path: 'instructorId', select: 'firstName lastName' },
     });
   }
 
   async checkEnrollment(studentId: string, courseId: string) {
-    const enrollment = await this.enrollmentModel.findOne({
-      studentId: new Types.ObjectId(studentId),
-      courseId: new Types.ObjectId(courseId),
-      status: EnrollmentStatus.ACTIVE,
-    }).populate({
-      path: 'courseId',
-      populate: { path: 'instructorId', select: 'firstName lastName' }
-    });
- 
+    const enrollment = await this.enrollmentModel
+      .findOne({
+        studentId: new Types.ObjectId(studentId),
+        courseId: new Types.ObjectId(courseId),
+        status: EnrollmentStatus.ACTIVE,
+      })
+      .populate({
+        path: 'courseId',
+        populate: { path: 'instructorId', select: 'firstName lastName' },
+      });
+
     return {
       isEnrolled: !!enrollment,
       enrollment,
@@ -63,7 +63,7 @@ export class EnrollmentService {
       .find({ studentId: new Types.ObjectId(studentId) })
       .populate({
         path: 'courseId',
-        populate: { path: 'instructorId', select: 'firstName lastName' }
+        populate: { path: 'instructorId', select: 'firstName lastName' },
       })
       .sort({ enrolledAt: -1 });
   }

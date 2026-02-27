@@ -45,7 +45,7 @@ export default function Sidebar() {
       {/* Logo Area */}
       <div className="h-20 flex items-center px-6 border-b border-zinc-800">
         <div className="flex items-center gap-3">
-          <div className="bg-red-700 p-2 rounded-md">
+          <div className="bg-red-700 p-2 rounded-sm">
             <GraduationCap className="text-white" size={20} />
           </div>
           <div>
@@ -70,7 +70,7 @@ export default function Sidebar() {
             <Link
               key={link.href}
               href={link.href}
-              className={`flex items-center gap-3 px-3 py-2.5 rounded-md text-sm font-medium transition-all ${
+              className={`flex items-center gap-3 px-3 py-2.5 rounded-sm text-sm font-medium transition-all ${
                 isActive
                   ? "bg-red-700 text-white"
                   : "text-zinc-400 hover:bg-zinc-900 hover:text-white"
@@ -97,7 +97,7 @@ export default function Sidebar() {
             <Link
               key={link.href}
               href={link.href}
-              className={`flex items-center gap-3 px-3 py-2.5 rounded-md text-sm font-medium transition-all ${
+              className={`flex items-center gap-3 px-3 py-2.5 rounded-sm text-sm font-medium transition-all ${
                 isActive
                   ? "bg-red-700 text-white"
                   : "text-zinc-400 hover:bg-zinc-900 hover:text-white"
@@ -112,7 +112,7 @@ export default function Sidebar() {
         {/* Logout Button */}
         <button
           onClick={logout}
-          className="flex items-center gap-3 px-3 py-2.5 rounded-md text-sm font-medium text-zinc-400 hover:bg-zinc-800 hover:text-white transition-all mt-1"
+          className="flex items-center gap-3 px-3 py-2.5 rounded-sm text-sm font-medium text-zinc-400 hover:bg-zinc-800 hover:text-white transition-all mt-1"
         >
           <LogOut size={18} className="text-zinc-500" />
           <span>Logout</span>
@@ -121,7 +121,7 @@ export default function Sidebar() {
 
       {/* User Profile (Bottom) */}
       <div className="p-4 border-t border-zinc-800">
-        <div className="flex items-center gap-3 p-2 rounded-md cursor-pointer hover:bg-zinc-900 transition-colors">
+        <div className="flex items-center gap-3 p-2 rounded-sm cursor-pointer hover:bg-zinc-900 transition-colors">
           <div className="bg-zinc-700 rounded-full h-10 w-10 overflow-hidden flex items-center justify-center ring-2 ring-red-700 text-white font-bold uppercase">
             {user?.firstName?.[0] || "U"}
           </div>

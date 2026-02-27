@@ -9,10 +9,7 @@ export class EnrollmentController {
   constructor(private readonly enrollmentService: EnrollmentService) {}
 
   @Post(':courseId')
-  async enroll(
-    @CurrentUser() user: any,
-    @Param('courseId') courseId: string,
-  ) {
+  async enroll(@CurrentUser() user: any, @Param('courseId') courseId: string) {
     return this.enrollmentService.enroll(user.userId, courseId);
   }
 
